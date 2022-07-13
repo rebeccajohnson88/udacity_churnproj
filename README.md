@@ -1,2 +1,2 @@
-# udacity_churnproj
+# Udacity churn project 
 Churn project for udacity 
