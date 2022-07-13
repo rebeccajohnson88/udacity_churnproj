@@ -16,7 +16,8 @@ def import_data(pth):
     output:
             df: pandas dataframe
     '''	
-	pass
+    df = pd.read_csv(pth)
+    return(df)
 
 
 def perform_eda(df):
