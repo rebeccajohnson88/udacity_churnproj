@@ -4,7 +4,21 @@
 # import libraries
 import os
 os.environ['QT_QPA_PLATFORM']='offscreen'
+import shap
+import joblib
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns; sns.set()
 
+from sklearn.preprocessing import normalize
+from sklearn.model_selection import train_test_split
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+
+from sklearn.metrics import plot_roc_curve, classification_report
 
 
 def import_data(pth):
@@ -16,7 +30,13 @@ def import_data(pth):
     output:
             df: pandas dataframe
     '''	
+    ## read in data
     df = pd.read_csv(pth)
+
+    ## construct binary churn indicator
+    df['Churn'] = df['Attrition_Flag'].apply(lambda val: 0 if 
+                                        val == "Existing Customer" else 1)
+
     return(df)
 
 
@@ -29,7 +49,7 @@ def perform_eda(df):
     output:
             None
     '''
-	pass
+    pass
 
 
 def encoder_helper(df, category_lst, response):
@@ -60,6 +80,7 @@ def perform_feature_engineering(df, response):
               y_train: y training data
               y_test: y testing data
     '''
+    pass
 
 def classification_report_image(y_train,
                                 y_test,

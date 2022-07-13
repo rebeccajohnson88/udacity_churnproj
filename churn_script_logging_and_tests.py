@@ -1,20 +1,21 @@
 import os
 import logging
-import churn_library_solution as cls
+#import churn_library_solution as cls
 import constants 
+from constants import *
 
 logging.basicConfig(
-    filename='./logs/churn_library.log',
+    filename=PATH_LOGFILE,
     level = logging.INFO,
     filemode='w',
     format='%(name)s - %(levelname)s - %(message)s')
 
 def test_import(import_data):
 	'''
-	test data import - this example is completed for you to assist with the other test functions
+	test data import 
 	'''
 	try:
-		df = import_data("./data/bank_data.csv")
+		df = import_data(PATH_DATA)
 		logging.info("Testing import_data: SUCCESS")
 	except FileNotFoundError as err:
 		logging.error("Testing import_eda: The file wasn't found")
