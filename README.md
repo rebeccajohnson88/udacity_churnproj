@@ -1,4 +1,4 @@
-# Predict Customer Churn
+# Predict Customer Churn [IN PROGRESS]
 
 - Project **Predict Customer Churn** of ML DevOps Engineer Nanodegree Udacity
 
