@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
-
+from sklearn import metrics
 from sklearn.metrics import plot_roc_curve, classification_report
 
 import constants  
@@ -74,10 +74,26 @@ def visualize_numeric(df, one_colname):
     plt.close()
     return None
 
+def visualize_numeric_bivar(df, one_colname):
+    '''
+    create histogram summarizing relationship between churn
+    and distribution of each numeric var
+    input:
+            df: pandas dataframe
+            one_colname: string with name of column to visualize
+
+    output:
+            figure to pass back to main eda function
+    '''
+    one_fig = sns.displot(df, x=one_colname, hue= LABEL_NAME, 
+                          multiple="dodge")
+    one_fig.savefig(PATH_EDA_FIGS + one_colname + "_bivar_wchurn.png")
+    return None
+
 
 def perform_eda(df):
     '''
-    perform eda on df and save figures to images folder
+    perform eda--univar and bivariate plots---on df and save figures to images folder
     input:
             df: pandas dataframe
 
@@ -95,6 +111,8 @@ def perform_eda(df):
     ## then, iterate through each type and produce and save figures
     [visualize_cat(df, one_col) for one_col in cat_columns]
     [visualize_numeric(df, one_col) for one_col in quant_columns]
+    [visualize_numeric_bivar(df, one_col) for one_col in quant_columns
+    if one_col != LABEL_NAME]
     
     ## return categorical columns for use later for encoding
     return cat_columns
@@ -166,7 +184,8 @@ def classification_report_image(y_train,
                                 y_train_preds_lr,
                                 y_train_preds_rf,
                                 y_test_preds_lr,
-                                y_test_preds_rf):
+                                y_test_preds_rf,
+                                modeldict):
     '''
     produces classification report for training and testing results and stores report as image
     in images folder
@@ -181,12 +200,8 @@ def classification_report_image(y_train,
     output:
              None
     '''
-    models_tosummarize = {'Random Forest': [y_train, y_train_preds_rf,
-                                            y_test, y_test_preds_rf],
-                         'Logistic Regression': [y_train, y_train_preds_lr,
-                                                y_test, y_test_preds_lr]}
     
-    for key, value in models_tosummarize.items():
+    for key, value in modeldict.items():
         plt.rc('figure', figsize=(10, 5))
         plt.text(0.01, 0.45, str(key + ' Train: '), {'fontsize': 10}, 
                          fontproperties = 'monospace')
@@ -207,14 +222,39 @@ def feature_importance_plot(model, X_data, output_pth):
     '''
     creates and stores the feature importances in pth
     input:
-            model: model object containing feature_importances_
+            model: model dictionary where a value is the model to find fi/coef
             X_data: pandas dataframe of X values
             output_pth: path to store the figure
 
     output:
              None
     '''
-    pass
+    
+    ## first, check whether rf or lrc
+    for key, value in model.items():
+        
+        ## 1. Set up conditional logic to deal with RF fi
+        ## versus LR coef
+        if key == "Random Forest":
+            imp = value[4].feature_importances_
+            xlabel = "Feature importances for: " + key
+        else:
+            imp = value[4].coef_
+            xlabel = "Coef for: " + key
+            
+        ## 2. create dataframe w/ info for plot
+        df_forplot = pd.DataFrame({'imp_coef': imp,
+                    'name': X_data.columns}).sort_values(by = 'imp_coef',
+                     ascending = False)
+        
+        ## 3. Plot
+        fi = sns.barplot(x="imp_coef", y="name", data= df_forplot)
+        fi.set(ylabel="Feature", xlabel= xlabel)
+        fi.savefig(output_pth + key + "_fiorcoef.png")
+        
+        ## 4. return nothing
+        return Null 
+
 
 def train_models(X_train, X_test, y_train, y_test, estimate_new):
     '''
@@ -264,14 +304,45 @@ def train_models(X_train, X_test, y_train, y_test, estimate_new):
                                     in [X_train, X_test]]
     y_train_preds_lr, y_test_preds_lr = [lrc.predict(x) for x
                                     in [X_train, X_test]]
+
+    ## 6. Create dictionary to store models to avoid repetitive code 
+    ## across mods
+    models_tosummarize = {'Random Forest': [y_train, y_train_preds_rf,
+                                            y_test, y_test_preds_rf, rfc_best],
+                         'Logistic Regression': [y_train, y_train_preds_lr,
+                                                y_test, y_test_preds_lr, lrc]}
+
+    ## 7. Plot and save ROC curves
+    ## note: adapted code from here: https://www.statology.org/plot-roc-curve-python/
+    for key, value in models_tosummarize.items():
+        y_pred_proba = value[4].predict_proba(X_test)[::,1]
+        fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
+        auc = metrics.roc_auc_score(y_test, y_pred_proba)
+
+        #create ROC curve
+        plt.plot(fpr,tpr,label= key + " model AUC="+str(auc))
+        plt.ylabel('True Positive Rate')
+        plt.xlabel('False Positive Rate')
+        plt.legend(loc=4)
+        plt.savefig(PATH_RESULTS_FIGS + key + "_roc_curve.png")
+        plt.close()
+
     
-    ## 6. Save images for classification report
+    ## 8. Calculate classification report and save images 
     classification_report_image(y_train,
                            y_test,
                         y_train_preds_lr,
                         y_train_preds_rf,
                         y_test_preds_lr,
-                        y_test_preds_rf)
+                        y_test_preds_rf, models_tosummarize)
+
+    ## 9. Plot feature importances or coef and save images
+    feature_importance_plot(model = models_tosummarize, 
+                            X_data = X_train, 
+                            output_pth = PATH_RESULTS_FIGS)
+
+
+    ## for testing purposes, return models
+    return(rfc_best, lrc)
     
-    return None 
 
