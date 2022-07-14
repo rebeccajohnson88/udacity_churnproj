@@ -9,7 +9,6 @@
 # import libraries
 import os
 os.environ['QT_QPA_PLATFORM']='offscreen'
-import shap
 import joblib
 import pandas as pd
 import numpy as np
