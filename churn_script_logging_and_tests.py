@@ -30,9 +30,21 @@ def test_import(import_data):
 
 
 def test_eda(perform_eda):
-	'''
-	test perform eda function
-	'''
+    '''
+    test perform eda function
+    '''
+    try:
+        assert os.path.isdir(PATH_EDA_FIGS)
+        logging.info("SUCCESS directory for images exists")
+    except AssertionError as err:
+        logging.error("ERROR inputted image directory does not exist")
+        raise err
+    try:
+        assert len(features) > 0
+        logging.info("SUCCESS some features for EDA")
+    except AssertionError as err:
+        logging.error("ERROR no features for EDA")
+        raise err
 
 
 def test_encoder_helper(encoder_helper):
