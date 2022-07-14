@@ -1,4 +1,9 @@
-# library doc string
+
+#################################################
+# Functions for Udacity project 1: customer churn
+# Author: Rebecca A. Johnson
+# Date: 071422
+#################################################
 
 
 # import libraries
@@ -239,7 +244,7 @@ def feature_importance_plot(model, X_data, output_pth):
             imp = value[4].feature_importances_
             xlabel = "Feature importances for: " + key
         else:
-            imp = value[4].coef_
+            imp = value[4].coef_[0]
             xlabel = "Coef for: " + key
             
         ## 2. create dataframe w/ info for plot
@@ -250,10 +255,13 @@ def feature_importance_plot(model, X_data, output_pth):
         ## 3. Plot
         fi = sns.barplot(x="imp_coef", y="name", data= df_forplot)
         fi.set(ylabel="Feature", xlabel= xlabel)
-        fi.savefig(output_pth + key + "_fiorcoef.png")
+        fi.figure.savefig(output_pth + key + "_fiorcoef.png")
+
+        ## 4. Remove imp
+        del imp
         
-        ## 4. return nothing
-        return Null 
+    ## 5. return nothing
+    return None 
 
 
 def train_models(X_train, X_test, y_train, y_test, estimate_new):
@@ -342,7 +350,18 @@ def train_models(X_train, X_test, y_train, y_test, estimate_new):
                             output_pth = PATH_RESULTS_FIGS)
 
 
-    ## for testing purposes, return models
-    return(rfc_best, lrc)
-    
+    ## return none
+    return None 
+
+if __name__ == '__main__':
+    df = import_data(PATH_DATA)
+    print('Imported data')
+    cat_columns = perform_eda(df = df)
+    print("Created plots")
+    df = encoder_helper(df = df, category_lst = cat_columns)
+    print("Encoded cat vars")
+    X_train, X_test, y_train, y_test = perform_feature_engineering(df)
+    print("Prepped data for model estimation")
+    train_models(X_train, X_test,  y_train, y_test, estimate_new = False)
+    print("Estimated models and stored results")
 
