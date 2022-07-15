@@ -104,6 +104,7 @@ The directory structure that results from a fully executed project is as follows
 │   ├── logistic_model.pkl
 │   └── rfc_model.pkl
 └── requirements.txt
+```
 
 ### Guide to [](EDA directory):
 
