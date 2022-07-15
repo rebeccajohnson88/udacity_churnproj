@@ -39,7 +39,7 @@ The order to run the files is the following, with the resulting expected outputs
 1. Open up terminal and run `pip install requirements.txt`. If this works, you should either see installation messages or messages that the requirements are already satisfied.
 2. Run the main model estimation script: `python churn_library.py` that generates various EDA and predictive model results. This calls the following [constants file](https://github.com/rebeccajohnson88/udacity_churnproj/blob/main/constants.py), which should be modified if pathnames, the label name, or other constant names change.
   - pylint score: 8.09/10
-3. Run the logging and testing script: `churn_script_logging_and_tests.py`. You can check the results of the tests in './logs/churn_library.log' and you can compare your log results to the log in the repo.
+3. Run the logging and testing script: `python churn_script_logging_and_tests.py`. You can check the results of the tests in './logs/churn_library.log' and you can compare your log results to the log in the repo.
   - pylint score: 8.15/10
 
 The scripts in `archive` are not to be run and instead are scripts either provided as the base of the project (e.g., `churn_notebook.ipynb`) or older requirements.tx that came with the project 
