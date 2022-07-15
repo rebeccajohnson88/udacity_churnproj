@@ -44,7 +44,24 @@ The order to run the files is the following, with the resulting expected outputs
 
 The scripts in `archive` are not to be run and instead are scripts either provided as the base of the project (e.g., `churn_notebook.ipynb`) or older requirements.tx that came with the project 
 
-The directory structure that results from a fully executed project is as follows (omitting the archive directory).
+If the run of the model is successful, the following EDA and model summary images should be produced, as well as .pkl files for the models stored in `models/`
+
+### Guide to [images/eda](https://github.com/rebeccajohnson88/udacity_churnproj/tree/main/images/eda):
+
+This contains univariate and bivariate summaries of the label and features. The naming conventions are as follows:
+
+- `[featurename].png`: histogram for continuous/numeric features; barplot of counts for categorical features
+- `[featurename_bivar_wchurn.png]`: for each numeric feature, dodged histogram showing the distribution by those who churn (Churn = 1) and those who do not churn (Churn = 0)
+
+### Guide to [images/results](https://github.com/rebeccajohnson88/udacity_churnproj/tree/main/images/results):
+
+These contain the following summaries for the two models estimated: (1) random forest (hyperparameters chosen by cross-validation) and (2) logistic regression.
+
+- `[modelname]_classificationreport.png`: Image of the sklearn classification report that reports true positives, false positives, etc for each model
+- `[modelname]_roc_curve.png`: ROC curve for each model with AUC
+- `[modelname]_fiorcoef.png`: feature importances for the random forest; coefficients for the logistic regression
+
+The directory structure that results from a fully executed project is as follows (omitting the archive directory):
 
 
 ```bash
@@ -106,20 +123,6 @@ The directory structure that results from a fully executed project is as follows
 └── requirements.txt
 ```
 
-### Guide to [images/eda](https://github.com/rebeccajohnson88/udacity_churnproj/tree/main/images/eda):
-
-This contains univariate and bivariate summaries of the label and features. The naming conventions are as follows:
-
-- `[featurename].png`: histogram for continuous/numeric features; barplot of counts for categorical features
-- `[featurename_bivar_wchurn.png]`: for each numeric feature, dodged histogram showing the distribution by those who churn (Churn = 1) and those who do not churn (Churn = 0)
-
-### Guide to [images/results](https://github.com/rebeccajohnson88/udacity_churnproj/tree/main/images/results):
-
-These contain the following summaries for the two models estimated: (1) random forest (hyperparameters chosen by cross-validation) and (2) logistic regression.
-
-- `[modelname]_classificationreport.png`: Image of the sklearn classification report that reports true positives, false positives, etc for each model
-- `[modelname]_roc_curve.png`: ROC curve for each model with AUC
-- `[modelname]_fiorcoef.png`: feature importances for the random forest; coefficients for the logistic regression
 
 
 
