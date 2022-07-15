@@ -10,9 +10,25 @@ Beyond the substantive focus, the project tests clean code principles, including
 
 ## Files and data description
 
-Before any of the files are run, here are the files in the root directory:
+Before any of the files are run, here are the files in the root directory and directory structure that needs to be set up locally:
 
 
+```bash
+├── Guide.ipynb
+├── README.md
+├── churn_library.py
+├── churn_script_logging_and_tests.py
+├── constants.py
+├── data
+│   └── bank_data.csv
+├── images
+│   ├── eda
+│   └── results
+├── logs
+├── models
+```
+
+The data is stored in []()
 
 ## Running Files
 How do you run your files? What should happen when you run your files?
