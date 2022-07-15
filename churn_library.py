@@ -23,7 +23,6 @@ import pandas as pd
 import joblib
 
 
-import constants
 from constants import (PATH_DATA, PATH_EDA_FIGS, 
 PATH_RESULTS_FIGS, PATH_MODELS, LABEL_NAME, PARAM_GRID_RF,
 COLS_TOKEEP)
@@ -97,6 +96,7 @@ def visualize_numeric_bivar(df_use, one_colname):
     one_fig = sns.displot(df_use, x=one_colname, hue=LABEL_NAME,
                           multiple="dodge")
     one_fig.savefig(PATH_EDA_FIGS + one_colname + "_bivar_wchurn.png")
+    plt.close()
 
 
 def perform_eda(df_use):
@@ -247,6 +247,7 @@ def feature_importance_plot(model, X_data, output_pth):
         fi_plot = sns.barplot(x="imp_coef", y="name", data=df_forplot)
         fi_plot.set(ylabel="Feature", xlabel=xlabel)
         fi_plot.figure.savefig(output_pth + key + "_fiorcoef.png")
+        plt.close()
 
         # 4. Remove imp
         del imp
