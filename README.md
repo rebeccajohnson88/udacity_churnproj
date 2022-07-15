@@ -44,8 +44,68 @@ The order to run the files is the following, with the resulting expected outputs
 
 The scripts in `archive` are not to be run and instead are scripts either provided as the base of the project (e.g., `churn_notebook.ipynb`) or older requirements.tx that came with the project 
 
-The directory structure that results from a fully executed project is as follows:
+The directory structure that results from a fully executed project is as follows (omitting the archive directory).
 
+
+```bash
+├── Guide.ipynb
+├── README.md
+├── churn_library.py
+├── churn_script_logging_and_tests.py
+├── constants.py
+├── data
+│   └── bank_data.csv
+├── images
+│   ├── eda
+│   │   ├── Avg_Open_To_Buy.png
+│   │   ├── Avg_Open_To_Buy_bivar_wchurn.png
+│   │   ├── Avg_Utilization_Ratio.png
+│   │   ├── Avg_Utilization_Ratio_bivar_wchurn.png
+│   │   ├── Card_Category.png
+│   │   ├── Churn.png
+│   │   ├── Contacts_Count_12_mon.png
+│   │   ├── Contacts_Count_12_mon_bivar_wchurn.png
+│   │   ├── Credit_Limit.png
+│   │   ├── Credit_Limit_bivar_wchurn.png
+│   │   ├── Customer_Age.png
+│   │   ├── Customer_Age_bivar_wchurn.png
+│   │   ├── Dependent_count.png
+│   │   ├── Dependent_count_bivar_wchurn.png
+│   │   ├── Education_Level.png
+│   │   ├── Gender.png
+│   │   ├── Income_Category.png
+│   │   ├── Marital_Status.png
+│   │   ├── Months_Inactive_12_mon.png
+│   │   ├── Months_Inactive_12_mon_bivar_wchurn.png
+│   │   ├── Months_on_book.png
+│   │   ├── Months_on_book_bivar_wchurn.png
+│   │   ├── Total_Amt_Chng_Q4_Q1.png
+│   │   ├── Total_Amt_Chng_Q4_Q1_bivar_wchurn.png
+│   │   ├── Total_Ct_Chng_Q4_Q1.png
+│   │   ├── Total_Ct_Chng_Q4_Q1_bivar_wchurn.png
+│   │   ├── Total_Relationship_Count.png
+│   │   ├── Total_Relationship_Count_bivar_wchurn.png
+│   │   ├── Total_Revolving_Bal.png
+│   │   ├── Total_Revolving_Bal_bivar_wchurn.png
+│   │   ├── Total_Trans_Amt.png
+│   │   ├── Total_Trans_Amt_bivar_wchurn.png
+│   │   ├── Total_Trans_Ct.png
+│   │   └── Total_Trans_Ct_bivar_wchurn.png
+│   └── results
+│       ├── Logistic\ Regression_classificationreport.png
+│       ├── Logistic\ Regression_fiorcoef.png
+│       ├── Logistic\ Regression_roc_curve.png
+│       ├── Random\ Forest_classificationreport.png
+│       ├── Random\ Forest_fiorcoef.png
+│       └── Random\ Forest_roc_curve.png
+├── logs
+│   └── churn_library.log
+├── models
+│   ├── logistic_model.pkl
+│   └── rfc_model.pkl
+└── requirements.txt
+
+### Guide to [](EDA directory):
 
 
 
