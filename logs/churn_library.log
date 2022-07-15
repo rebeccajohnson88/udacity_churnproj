@@ -1,3 +1,15 @@
 root - INFO - Testing import_data: SUCCESS
-root - INFO - Testing import_data: SUCCESS
 root - INFO - SUCCESS directory for images exists
+numexpr.utils - INFO - Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+root - INFO - SUCCESS passed test for visualize_cat
+root - INFO - SUCCESS passed test for visualize_numeric
+root - INFO - SUCCESS passed test for visualize_numeric_bivar
+root - INFO - SUCCESS directory for images exists
+root - INFO - SUCCESS encoder_helper produced result with non-zero shape
+root - INFO - SUCCESS encoder_helper added encoded v of cols in category_lst
+root - INFO - SUCCESS training data correct dimensions
+root - INFO - SUCCESS test data correct dimensions
+root - INFO - SUCCESS train and test label are correct type
+root - INFO - SUCCESS found all mod results
+root - INFO - SUCCESS all tests finished running
