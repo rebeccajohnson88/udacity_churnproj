@@ -106,8 +106,20 @@ The directory structure that results from a fully executed project is as follows
 └── requirements.txt
 ```
 
-### Guide to [](EDA directory):
+### Guide to [images/eda](https://github.com/rebeccajohnson88/udacity_churnproj/tree/main/images/eda):
 
+This contains univariate and bivariate summaries of the label and features. The naming conventions are as follows:
+
+- `[featurename].png`: histogram for continuous/numeric features; barplot of counts for categorical features
+- `[featurename_bivar_wchurn.png]`: for each numeric feature, dodged histogram showing the distribution by those who churn (Churn = 1) and those who do not churn (Churn = 0)
+
+### Guide to [images/results](https://github.com/rebeccajohnson88/udacity_churnproj/tree/main/images/results):
+
+These contain the following summaries for the two models estimated: (1) random forest (hyperparameters chosen by cross-validation) and (2) logistic regression.
+
+- `[modelname]_classificationreport.png`: Image of the sklearn classification report that reports true positives, false positives, etc for each model
+- `[modelname]_roc_curve.png`: ROC curve for each model with AUC
+- `[modelname]_fiorcoef.png`: feature importances for the random forest; coefficients for the logistic regression
 
 
 
